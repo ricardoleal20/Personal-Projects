@@ -1,9 +1,51 @@
-My personal projects.
+# Proyectos Personales - *Ricardo Leal*
 
-Hi! My name is Ricardo Leal, i'm a physics student in the Autonomous university of Nuevo León in México. 
+## **Español**
 
-My plan doing this repository it's share all my codes with the comunity. Also, I hope this repository works to show all my acquired skills during my profesional education, by doing several online courses and the work I had to do to get through my school classes.
+Soy un estudiante de la licenciatura de Física en la UANL, actualmente me encuentro en mi último semestre.
 
-I hope that by looking at my codes you get an idea of how capable I can be when it comes to solving different problems.
+Este repositorio incluye todos mis proyectos personales realizados durante mi preparación estudiantil. Estos proyectos personales son mis tareas, trabajos finales y programas que hice para facilitar o automatizar procesos/actividades. 
 
-This section is under development.
+En el repositorio se podrán encontrar trabajos sobre las siguientes áreas:
+
++ **Python**
+    + Procesos estocásticos
+    + Ciencia de datos
+    + Métodos numéricos para la física
+		+ Solución de ecuaciones diferenciales (ordinarias y parciales)
+		+ Modelado matemático
+		+ Análisis numérico
++ ** Fortran**
+    * Métodos numéricos para la física computacional
+		+ Solución de ecuaciones diferenciales
+		+ Cálculo diferencial e integral
+
+** Esta sección se encuentra en desarrollo **
+
+Espero este repositorio pueda demostrar las habilidades que manejo y a su vez pueda ayudar a cualquier alumno que cheque sobre esto. 
+
+## **English**
+I'm a Physics student at the UANL, currently at my last semester at the university.
+
+This repository includes all my personal projects done during my student preparation. These personal projects are my tasks, final works and programs that I made to facilitate or automate processes/activities. 
+
+In the repository you will find work on the following areas:
+
++ **Python**
+    + Stochastic processes
+    + Data Science
+    + Numerical methods for physics
+		+ Solution of differential equations (ordinary and partial)
+		+ Mathematical modeling
+		+ Numerical analysis
++ ** Fortran**
+    * Numerical methods for computational physics
+		+ Solution of differential equations
+		+ Differential and integral calculus
+
+** This section is under development**
+
+I hope this repository can demonstrate the skills I manage and in turn can help any student who checks on this. 
+
+e-mail: ricardo.lealpz@gmail.com
+LinkedIn: https://www.linkedin.com/in/ricardoleal20/
