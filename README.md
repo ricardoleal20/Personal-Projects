@@ -15,12 +15,12 @@ En el repositorio se podrán encontrar trabajos sobre las siguientes áreas:
 		+ Solución de ecuaciones diferenciales (ordinarias y parciales)
 		+ Modelado matemático
 		+ Análisis numérico
-+ ** Fortran**
++ **Fortran**
     * Métodos numéricos para la física computacional
 		+ Solución de ecuaciones diferenciales
 		+ Cálculo diferencial e integral
 
-** Esta sección se encuentra en desarrollo **
+**Esta sección se encuentra en desarrollo**
 
 Espero este repositorio pueda demostrar las habilidades que manejo y a su vez pueda ayudar a cualquier alumno que cheque sobre esto. 
 
@@ -38,12 +38,12 @@ In the repository you will find work on the following areas:
 		+ Solution of differential equations (ordinary and partial)
 		+ Mathematical modeling
 		+ Numerical analysis
-+ ** Fortran**
++ **Fortran**
     * Numerical methods for computational physics
 		+ Solution of differential equations
 		+ Differential and integral calculus
 
-** This section is under development**
+**This section is under development**
 
 I hope this repository can demonstrate the skills I manage and in turn can help any student who checks on this. 
 
