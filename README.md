@@ -47,5 +47,5 @@ In the repository you will find work on the following areas:
 
 I hope this repository can demonstrate the skills I manage and in turn can help any student who checks on this. 
 
-e-mail: ricardo.lealpz@gmail.com
+e-mail: ricardo.lealpz@gmail.com \\\\
 LinkedIn: https://www.linkedin.com/in/ricardoleal20/
