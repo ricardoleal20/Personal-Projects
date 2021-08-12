@@ -117,7 +117,7 @@ def stoc_sol_diff(Nx,Nt,x,k,dt):
     """
     T=IC(Nx,Nt,x)
     for j in range(0,Nt-1):
-        sigma=np.random.uniform(low=-1,high=1)
+        sigma=np.random.uniform(low=-10,high=10)
         dTdx=T[2:,j]-2*T[1:-1,j]+T[:-2,j]
         T[1:-1,j+1]=T[1:-1,j]+k*dTdx+sigma*dW(dt, n=T[1:-1,j].size)
     return T
@@ -163,7 +163,7 @@ def stoc_sol_fft(Nx,Nt,x,alpha,dx,dt):
     """
     T=IC(Nx,Nt,x)
     for j in range(Nt-1):
-        sigma=np.random.uniform(low=-1,high=1)
+        sigma=np.random.uniform(low=-10,high=10)
         T[:,j+1]=T[:,j]+dt*alpha*derivative_fft(T[:,j],Nx,dx,2)+sigma*dW(dt,n=T[:,j].size)
         T[0,j+1]=0
         T[-1,j+1]=0
@@ -330,10 +330,10 @@ def heat_stochastic():
     N=300
 
     tiempo=time()
-    #Tn_dm=np.zeros((Nx,Nt))
-    #Tn_fft=np.zeros((Nx,Nt))
-    Tn_dm=[]
-    Tn_fft=[]
+    Tn_dm=np.zeros((Nx,Nt))
+    Tn_fft=np.zeros((Nx,Nt))
+    #Tn_dm=[]
+    #Tn_fft=[]
     for i in range(N):
         #print('Frame ',i)
         Tn_dm[:,:]+=(stoc_sol_diff(Nx,Nt,x,k,dt))
