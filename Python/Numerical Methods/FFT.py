@@ -252,9 +252,8 @@ def animate(i,line1,line2,line3,x,t,T_fft,T_dm,T_an):
     line3.set_data(x,T_fft[:,i])
     plt.title('Sistema al tiempo t={0:.2f}s'.format(t[i]))
     return line1, line2, line3,
-    
 
-def heat_equation():
+def heat_equation(stochastic):
     #-------------------------------------#
     # Variables espacio                   #
     #-------------------------------------#
@@ -271,84 +270,38 @@ def heat_equation():
     tf=50
     Nt=1001
     dt=tf/(Nt-1)
-    #dt=0.5*dx**2/alpha
-    #Nt=int(tf/dt+1)
 
     t=np.linspace(0,tf,Nt)
-
-    #-------------------------------------#
-    # Checar CFL condition                #
-    #-------------------------------------#
-    k=CFL(alpha,dt,dx)
-
-    #-------------------------------------#
-    # Solución de la ecuación             #
-    #-------------------------------------#
-    T_an=sol_analitica(x,t,alpha,Nx,Nt)
-    T_dm=sol_diff(Nx,Nt,x,k)
-    T_fft=sol_fft(Nx,Nt,x,alpha,dx,dt)
-
-    #-------------------------------------#
-    # Gráficar                            #
-    #-------------------------------------#
-
-    plot(x,T_fft,Nt)
-    plot_animation(x,t,T_fft,T_dm,T_an,Nx,Nt)
-
-def heat_stochastic():
-    #-------------------------------------#
-    # Variables espacio                   #
-    #-------------------------------------#
-    alpha=0.5
-
-    Nx=101
-    xf=50
-    dx=xf/(Nx-1)
-    x=np.linspace(0,xf,Nx)
-
-    #-------------------------------------#
-    # Variables tiempo                    #
-    #-------------------------------------#
-    tf=50
-    Nt=1001
-    dt=tf/(Nt-1)
-    #dt=0.5*dx**2/alpha
-    #Nt=int(tf/dt+1)
-
-    t=np.linspace(0,tf,Nt)
-
-    #-------------------------------------#
-    # Checar CFL condition                #
-    #-------------------------------------#
-    k=CFL(alpha,dt,dx)
-
-    #-------------------------------------#
-    # Solución de la ecuación             #
-    #-------------------------------------#
-    T_an=sol_analitica(x,t,alpha,Nx,Nt)
-
-    N=300
-
     tiempo=time()
-    Tn_dm=np.zeros((Nx,Nt))
-    Tn_fft=np.zeros((Nx,Nt))
-    #Tn_dm=[]
-    #Tn_fft=[]
-    for i in range(N):
-        #print('Frame ',i)
-        Tn_dm[:,:]+=(stoc_sol_diff(Nx,Nt,x,k,dt))
-        Tn_fft[:,:]+=(stoc_sol_fft(Nx,Nt,x,alpha,dx,dt))
 
-        #Tn_dm.append(stoc_sol_diff(Nx,Nt,x,k,dt))
-        #Tn_fft.append(stoc_sol_fft(Nx,Nt,x,alpha,dx,dt))
+    #-------------------------------------#
+    # Checar CFL condition                #
+    #-------------------------------------#
+    k=CFL(alpha,dt,dx)
 
-    T_dm=Tn_dm/N
-    #T_dm=np.mean(Tn_dm,axis=0)
-    T_fft=Tn_fft/N
-    #T_fft=np.mean(Tn_fft,axis=0)
+    #-------------------------------------#
+    # Solución de la ecuación             #
+    #-------------------------------------#
+    T_an=sol_analitica(x,t,alpha,Nx,Nt)
 
-    #T_dm=Tn_dm[0]
-    #T_fft=Tn_fft[0]
+    print('Se esta realizando la simulación.')
+    if stochastic=='yes':
+        N=int(2e3)
+        print('Es una simulación estocástica con {0:.0f} experimentos'.format(N))
+        Tn_dm=np.zeros((Nx,Nt))
+        Tn_fft=np.zeros((Nx,Nt))
+        for i in range(N):
+            if i%100==0:
+                print('Vamos en el frame {0:.0f}'.format(i))
+            Tn_dm[:,:]+=(stoc_sol_diff(Nx,Nt,x,k,dt))
+            Tn_fft[:,:]+=(stoc_sol_fft(Nx,Nt,x,alpha,dx,dt))
+        T_dm=Tn_dm/N
+        T_fft=Tn_fft/N
+    else:
+        print('Es una simulación determinista')
+        T_dm=stoc_sol_diff(Nx,Nt,x,k,d)
+        T_fft=stoc_sol_fft(Nx,Nt,x,alpha,dx,dt)
+
 
     tiempo_total(tiempo)
 
@@ -358,14 +311,11 @@ def heat_stochastic():
     # Gráficar                            #
     #-------------------------------------#
 
-    #print('Se esta gráficando.')
-    #plot(x,T_fft,Nt)
+    print('Se esta gráficando.')
+    plot(x,T_fft,Nt)
     print('Se esta creando una animación.')
     plot_animation(x,t,T_fft,T_dm,T_an,Nx,Nt)
 
 
-
-
 if __name__=='__main__':
-    #heat_equation()
-    heat_stochastic()
+    heat_equation(stochastic='yes')
