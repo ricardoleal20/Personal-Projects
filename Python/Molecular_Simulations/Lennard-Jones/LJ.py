@@ -12,12 +12,14 @@ class Lennard_Jones:
                 dt,
                 x0,
                 T0,
+                T_thermostat,
                 m,
                 box,
                 sigma,
                 epsilon,
                 dim: int,
                 filename: str,
+                n_thermostat: int,
                 print_every: int):
         """
         A ver que pones
@@ -27,7 +29,7 @@ class Lennard_Jones:
         
 
         #Solve the system
-        self.SimulateSystem(n_simulations,N_particles,dt,x0,T0,m,box, sigma, epsilon, dim, filename, print_every)
+        self.SimulateSystem(n_simulations,N_particles,dt,x0,T0,T_thermostat,m,box, sigma, epsilon, dim, filename, n_thermostat, print_every)
 
         # Print the total time of simulation
         self.total_time(initial_time)
@@ -39,12 +41,14 @@ class Lennard_Jones:
                        dt,
                        x0,
                        T0,
+                       T_thermostat,
                        m,
                        box,
                        sigma,
                        epsilon,
                        dim: int,
                        filename: str,
+                       n_thermostat: int,
                        print_every: int):
         """
         Por ahora no pongas nada
@@ -92,11 +96,15 @@ class Lennard_Jones:
             # Get the new values for x and v
             x,v=self.SolveMotion(x,v,dt,m,F,Fn)
 
+            if not step%n_thermostat:
+                scaling = np.sqrt(T_thermostat/T[step-1])
+                v = v*scaling
+
             # Calculate the Kinetic energy of the system
             E[step,1] = 0.5*np.sum(np.power(v,2))
 
             # Compute the temperature of the system
-            T[step] = E[step,1]/(2)
+            T[step] = E[step,1]/2
 
             # Compute the pressure of the box
             P[step] = rho*T[step]+P[step-1]/(dim*box**dim)
@@ -236,12 +244,18 @@ class Lennard_Jones:
         theta = 2*np.pi*np.random.rand(N_particles)
 
         # Magnitue of Velocity
-        v_mag = np.sqrt(dim*T/N_particles)
+        v_mag = np.sqrt(T/m[0,0])
 
         # Now, assign the values of velocity
-        v[:,0] = np.cos(theta)*v_mag
-        v[:,1] = np.sin(theta)*v_mag
-        v[:,2] = np.cos(theta)*v_mag
+        #v[:,0] = np.cos(theta)*v_mag
+        #v[:,1] = np.sin(theta)*v_mag
+        #v[:,2] = np.cos(theta)*v_mag
+
+        m = m[0,0]
+
+        v[:,0] = np.random.uniform(low=-v_mag,high=v_mag,size=N_particles)*1.18
+        v[:,1] = np.random.uniform(low=-v_mag,high=v_mag,size=N_particles)*1.18
+        v[:,2] = np.random.uniform(low=-v_mag,high=v_mag,size=N_particles)*1.18
 
         return v
 

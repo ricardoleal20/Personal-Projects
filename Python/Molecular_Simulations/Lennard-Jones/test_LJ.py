@@ -34,6 +34,8 @@ print_every= 50
 box = 40
 
 T0=300
+T_thermostat = T0
+n_thermostat = 100
 epsilon=0.996
 sigma=3.405
 m=196.96
@@ -79,7 +81,7 @@ def lectura_oro():
     """
     Función de Python que lee un .dat y regresa solamente las coordenadas del sistema.
     """
-    data = pd.read_csv('/home/ricardoleal20/Documentos/Github/Personal-Projects/Python/Molecular Simulations/Lennard-Jones/newAu.dat',skiprows=9, header=None, sep=' ')
+    data = pd.read_csv('/home/ricardoleal20/Documentos/Github/Personal-Projects/Python/Molecular_Simulations/Lennard-Jones/newAu.dat',skiprows=9, header=None, sep=' ')
     df = pd.DataFrame(data)
     df.columns = ['Atomos','ID','Pos. x','Pos. y','Pos. z']
     df.drop(columns={'Atomos','ID'},inplace=True)
@@ -95,9 +97,11 @@ x0 = lectura_oro()
 N_particles = len(x0)
 m = m*np.ones((N_particles,3))
 
-Solution = Lennard_Jones(N_simulations, N_particles, dt, x0, T0, m, box, sigma, epsilon, 3, 'prueba.lammpstrj', print_every)
+Solution = Lennard_Jones(N_simulations, N_particles, dt, x0, T0, T_thermostat, m, box, sigma, epsilon, 3, 'prueba.lammpstrj', n_thermostat, print_every)
 
 latex()
+
+N_particles = 2
 
 size = 4
 
